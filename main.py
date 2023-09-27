@@ -8,3 +8,17 @@
 - copy this token and paste it in access_token file
 
 '''
+
+import os
+import time
+import place_order
+import threading
+from datetime import date
+from datetime import timedelta
+from fyers_api import fyersModel
+from historical_data import live_data
+from datetime import datetime
+
+
+access_token = open("access_token",'r').read()
+fyers = fyersModel.FyersModel(client_id='GE5QQJSV08-100', token=access_token, log_path=os.getcwd())
