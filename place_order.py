@@ -1,6 +1,6 @@
 
 import os
-from fyers_api import fyersModel
+from fyers_apiv3 import fyersModel
 
 
 #access_token = open("access_token",'r').read()
