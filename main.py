@@ -24,7 +24,6 @@ access_token = open("access_token",'r').read()
 fyers = fyersModel.FyersModel(client_id='GE5QQJSV08-100', token=access_token, log_path=os.getcwd())
 end_date = date.today()
 start_date = date.today() - timedelta(days = 1)
-call_strike = "NSE:NIFTY23SEP19700CE"
-time.sleep(10)
+call_strike = "NSE:NIFTY23OCT19700PE"
 df = live_data(fyers,call_strike,start_date,end_date)
 df.to_csv("data.csv")
