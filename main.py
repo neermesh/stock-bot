@@ -26,7 +26,7 @@ end_date = date.today()
 start_date = date.today() - timedelta(days = 1)
 #end_date = "2023-09-29"
 #start_date = "2023-09-28"
-call_strike = "NSE:NIFTY23O0519600CE"
+call_strike = "NSE:NIFTY2411121500PE"
 df = live_data(fyers,call_strike,start_date,end_date)
 print(df)
 df.to_csv("data.csv")
