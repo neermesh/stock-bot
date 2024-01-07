@@ -22,11 +22,11 @@ from datetime import datetime
 
 access_token = open("access_token",'r').read()
 fyers = fyersModel.FyersModel(client_id='GE5QQJSV08-100', token=access_token, log_path=os.getcwd())
-end_date = date.today()
-start_date = date.today() - timedelta(days = 1)
-#end_date = "2023-09-29"
-#start_date = "2023-09-28"
-call_strike = "NSE:NIFTY2411121500PE"
+#end_date = date.today()
+#start_date = date.today() - timedelta(days = 1)
+end_date = "2023-01-01"
+start_date = "2023-01-05"
+call_strike = "NSE:ADANIPORTS"
 df = live_data(fyers,call_strike,start_date,end_date)
 print(df)
-df.to_csv("data.csv")
+df.to_csv('data.csv')

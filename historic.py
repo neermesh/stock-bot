@@ -17,7 +17,7 @@ def time_from_datetime(dt):
 access_token = open("access_token",'r').read()
 fyers = fyersModel.FyersModel(client_id='GE5QQJSV08-100', token=access_token, log_path=os.getcwd())
 end_date = date.today()
-start_date = "2023-07-06"
+start_date = "2023-12-06"
 print(start_date,end_date)
 symbol = "NSE:NIFTY50-INDEX"
 data = {
