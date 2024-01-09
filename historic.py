@@ -14,18 +14,23 @@ def time_from_datetime(dt):
     else:
         return dt.time()
 
+def getOptionFormat(stock, intExpiry, strike, ce_pe):
+    return "NSE:" + str(stock) + str(intExpiry)+str(strike)+str(ce_pe)
+
 access_token = open("access_token",'r').read()
 fyers = fyersModel.FyersModel(client_id='GE5QQJSV08-100', token=access_token, log_path=os.getcwd())
 end_date = date.today()
-start_date = "2023-12-06"
+start_date = "2023-01-01"
 print(start_date,end_date)
-symbol = "NSE:NIFTY50-INDEX"
+symbol = getOptionFormat("NIFTY", "111", 21750, "CE")
+print(symbol)
 data = {
     "symbol":symbol,
-    "resolution":"1",
+    "resolution":"5",
     "date_format":"1",
     "range_from":start_date,
-    "range_to":end_date
+    "range_to":end_date,
+    "cont_flag":"1"
     }
 
 response = fyers.history(data=data)

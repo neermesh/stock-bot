@@ -1,34 +1,54 @@
+from backtesting import Backtest, Strategy
 import pandas as pd
-import numpy as np
 
-# Assuming 'df' is your DataFrame and it has 'Close' column
-df = pd.read_csv('data.csv')
+def calculate_ema(data, window):
+    return pd.Series(data).ewm(span=window).mean()
 
-# Moving Average Length - LookBack Period
-len = 20
-len2 = 50
+class EMACross(Strategy):
+    short_window = 10
+    long_window = 50
 
-# 1=SMA, 2=EMA, 3=WMA
-atype = 1
-atype2 = 2
+    def init(self):
+        self.short_ema = self.I(calculate_ema, self.data.Close, self.short_window)
+        self.long_ema = self.I(calculate_ema, self.data.Close, self.long_window)
 
-# Calculate moving averages
-if atype == 1:
-    df['avg'] = df['Close'].rolling(window=len).mean()
-elif atype == 2:
-    df['avg'] = df['Close'].ewm(span=len, adjust=False).mean()
-elif atype == 3:
-    df['avg'] = df['Close'].rolling(window=len).apply(lambda x: np.average(x, weights=np.arange(len, 0, -1)))
+    def next(self):
+        if not self.position:  # if not in the market
+            if self.short_ema[-1] > self.long_ema[-1]:
+                self.buy()
+        else:  # in the market
+            if self.short_ema[-1] < self.long_ema[-1]:
+                self.sell()
 
-if atype2 == 1:
-    df['avg2'] = df['Close'].rolling(window=len2).mean()
-elif atype2 == 2:
-    df['avg2'] = df['Close'].ewm(span=len2, adjust=False).mean()
-elif atype2 == 3:
-    df['avg2'] = df['Close'].rolling(window=len2).apply(lambda x: np.average(x, weights=np.arange(len2, 0, -1)))
+# Load data
+data = pd.read_csv('data.csv', index_col='Date', parse_dates=True)
 
-# Change color based on direction
-#df['color'] = np.where(df['avg'] > df['avg'].shift(1), 'lime', 'red')
-df['color'] = np.where(df['avg2'] > df['avg2'].shift(1), 1, 0)
+# Remove duplicates
+data = data.loc[~data.index.duplicated(keep='first')]
 
-df.to_csv('data1.csv', index=False)
+# Create a Backtest instance
+# ... (previous code)
+
+# Create a Backtest instance
+bt = Backtest(data, EMACross, cash=100000, commission=.002)
+
+# Run the backtest
+stats = bt.run()
+
+# Print out the final result
+print('Final Portfolio Value: %.2f' % stats['Equity Final [$]'])
+
+# Print the statistics
+print('Stats:', stats)
+
+'''# Optimize the strategy
+stats = bt.optimize(short_window=range(1, 15, 1),
+                    long_window=range(5, 60, 5),
+                    maximize='Equity Final [$]',
+                    constraint=lambda p: p.short_window < p.long_window)
+
+# Print out the final result
+print('Final Portfolio Value: %.2f' % stats['Equity Final [$]'])
+
+# Print the optimized parameters
+print('Optimized Parameters:', stats['_strategy'])'''
