@@ -1,6 +1,0 @@
-
-1704695007844 :: history :: {'symbol': 'NSE:NIFTY11121750CE', 'resolution': '5', 'date_format': '1', 'range_from': '2023-01-01', 'range_to': datetime.date(2024, 1, 8), 'cont_flag': '1'} :: 1704695007991 :: {'s': 'error', 'code': -300, 'message': 'Please provide a valid symbol'}
-
-1704695150064 :: history :: {'symbol': 'NSE:NIFTY11121750CE', 'resolution': '5', 'date_format': '1', 'range_from': '2023-01-01', 'range_to': datetime.date(2024, 1, 8), 'cont_flag': '1'} :: 1704695150173 :: {'s': 'error', 'code': -300, 'message': 'Please provide a valid symbol'}
-
-1704695212584 :: history :: {'symbol': 'NSE:NIFTY24JAN21750CE', 'resolution': '1', 'date_format': '1', 'range_from': '2024-01-01', 'range_to': '2024-01-08'} :: 1704695212753 :: {'s': 'error', 'code': -300, 'message': ''}

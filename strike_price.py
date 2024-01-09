@@ -54,6 +54,7 @@ class StockBot:
         return "NSE:" + str(self.stock) + str(intExpiry)+str(strike)+str(ce_pe)
 
     def findStrikePriceATM(self):
+        intExpiry = None
         if self.stock == "BANKNIFTY":
             intExpiry=self.getBankNiftyExpiryDate()
         elif self.stock == "NIFTY":
