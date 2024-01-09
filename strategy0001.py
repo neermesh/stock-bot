@@ -27,10 +27,11 @@ class Strategy0001:
 
         self.df['signal'] = np.where(self.df['avg2'] > self.df['avg2'].shift(1), 1, 0)
 
-    def save_to_csv(self, filename):
-        self.df.to_csv(filename, index=False)
+    def get_data(self):
+            return self.df
 
 if __name__ == "__main__":
     strategy = Strategy0001("NSE:NIFTY50-INDEX", "1", 5)
     strategy.calculate_moving_averages(20, 50, 1, 2)
-    strategy.save_to_csv('data.csv')
+    df = strategy.get_data()
+    print(df)
