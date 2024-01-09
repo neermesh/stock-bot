@@ -30,7 +30,7 @@ class HistoricalData:
         response = self.fyers.history(data=data)['candles']
 
         # Create a DataFrame
-        columns = ['Timestamp','open','high','low','close','volume']
+        columns = ['Timestamp','Open','High','Low','Close','Volume']
         df = pd.DataFrame(response, columns=columns)
 
         # Convert Timestamp to datetime in UTC
