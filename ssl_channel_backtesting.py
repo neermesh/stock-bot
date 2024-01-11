@@ -1,4 +1,4 @@
-from backtesting import Backtest, Strategy
+from backtesting0001 import Backtest, Strategy
 import pandas as pd
 
 def calculate_ema(data, window):

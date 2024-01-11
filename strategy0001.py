@@ -31,7 +31,8 @@ class Strategy0001:
             return self.df
 
 if __name__ == "__main__":
-    strategy = Strategy0001("NSE:NIFTY50-INDEX", "1", 5)
+    strategy = Strategy0001("NSE:NIFTY50-INDEX", "5", 5)
     strategy.calculate_moving_averages(20, 50, 1, 2)
     df = strategy.get_data()
+    df.to_csv("strategy0001.csv")
     print(df)
